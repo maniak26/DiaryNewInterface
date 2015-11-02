@@ -100,6 +100,7 @@ public class DiaryActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, PreferencePage.class));
             return true;
         }
 

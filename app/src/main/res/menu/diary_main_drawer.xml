@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item
+            android:title="@string/favourites"
+            android:id="@+id/nav_favlist"/>
+        <item
+            android:title="@string/posts"
+            android:id="@+id/nav_fav" />
+        <item
+            android:title="@string/my_diary"
+            android:id="@+id/nav_diary" />
+        <item
+            android:title="@string/discussions"
+            android:id="@+id/nav_discussions"
+            app:actionLayout="@layout/navigation_menu_discussions_counter"
+            app:showAsAction="always"/>
+        <item
+            android:title="@string/quotes"
+            android:id="@+id/nav_quotes" />
+
+        <item xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:title="@string/umail"
+            android:id="@+id/nav_umail"
+            app:actionLayout="@layout/navigation_menu_umail_counter"
+            app:showAsAction="always"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/nav_others">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
+            <item android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="@string/menu_settings" />
+            <item android:id="@+id/nav_menu_close"
+                android:title="@string/menu_close"
+                android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
         </menu>
     </item>
 

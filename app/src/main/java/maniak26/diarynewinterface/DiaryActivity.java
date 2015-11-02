@@ -1,5 +1,7 @@
 package maniak26.diarynewinterface;
 
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +14,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import maniak26.diarynewinterface.fragments.DiaryFragmentList;
+import maniak26.diarynewinterface.fragments.DiaryFragmentUmail;
+import maniak26.diarynewinterface.preferences.PreferencePage;
+
 
 public class DiaryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    protected DiaryFragmentList diaryFragmentList;
+    protected DiaryFragmentUmail diaryFragmentUmail;
+    protected FragmentTransaction fragmentTransaction;
+
+    protected TextView mLogin;
+    protected TextView mDiscussionsCounter;
+    protected TextView mUmailCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +56,17 @@ public class DiaryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        diaryFragmentList = new DiaryFragmentList();
+        diaryFragmentUmail = new DiaryFragmentUmail();
+
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.contentMain, diaryFragmentList);
+        fragmentTransaction.commit();
+        mLogin = (TextView) navigationView.findViewById(R.id.login_name);
+        mDiscussionsCounter = (TextView) navigationView.findViewById(R.id.nav_discussions_counter);
+        mUmailCounter = (TextView) navigationView.findViewById(R.id.nav_umail_counter);
+
     }
 
     @Override
@@ -80,20 +107,38 @@ public class DiaryActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (item.getItemId()) {
+            case R.id.nav_favlist:
+                //setCurrentTab(TAB_FAV_LIST, false);
+               //break;
+            case R.id.nav_fav:
+                //setCurrentTab(TAB_FAV_POSTS, false);
+                //drawer.closeDrawer(navigationView);
+                break;
+            case R.id.nav_diary:
+                //setCurrentTab(TAB_MY_DIARY, false);
+                //drawer.closeDrawer(navigationView);
+                break;
+            case R.id.nav_discussions:
+                //setCurrentTab(TAB_DISCUSSIONS, false);
+               //drawer.closeDrawer(navigationView);
+                break;
+            case R.id.nav_quotes:
+                //handleBackground(Utils.HANDLE_PICK_URL, new Pair<>(getUser().getOwnDiaryUrl() + "?quote", false));
+                //drawer.closeDrawer(navigationView);
+                break;
+            case R.id.nav_umail:
+                //TODO call umail fragment here
+                //Intent postIntent = new Intent(getApplicationContext(), UmailListActivity.class);
+                //startActivity(postIntent);
+                //drawer.closeDrawer(navigationView);
+                break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this, PreferencePage.class));
+                break;
+            case R.id.nav_menu_close:
+                break;
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

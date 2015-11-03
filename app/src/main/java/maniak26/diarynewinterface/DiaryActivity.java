@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.util.List;
 
 import maniak26.diarynewinterface.fragments.DiaryFragmentList;
 import maniak26.diarynewinterface.fragments.DiaryFragmentUmail;
@@ -31,6 +28,8 @@ public class DiaryActivity extends AppCompatActivity
 
     protected DiaryFragmentList diaryFragmentList;
     protected DiaryFragmentUmail diaryFragmentUmail;
+
+    protected android.app.FragmentManager fragmentManager;
     protected FragmentTransaction fragmentTransaction;
 
     protected TextView mLogin;
@@ -40,6 +39,9 @@ public class DiaryActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.diary_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,10 +67,23 @@ public class DiaryActivity extends AppCompatActivity
         diaryFragmentList = new DiaryFragmentList();
         diaryFragmentUmail = new DiaryFragmentUmail();
 
-        fragmentTransaction = getFragmentManager().beginTransaction();
+        //TODO : read https://developer.android.com/intl/ru/guide/components/fragments.html
+        fragmentManager = getFragmentManager();
+
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.contentMain, diaryFragmentList);
         fragmentTransaction.commit();
+
         mLogin = (TextView) navigationView.findViewById(R.id.login_name);
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String email  = extras.getString("email");
+            // not working on this support lib version
+            //mLogin.setText(email);
+        }
+
         mDiscussionsCounter = (TextView) navigationView.findViewById(R.id.nav_discussions_counter);
         mUmailCounter = (TextView) navigationView.findViewById(R.id.nav_umail_counter);
 

@@ -190,7 +190,7 @@ public class AuthorizationForm extends AppCompatActivity implements LoaderCallba
             mAuthTask.execute((Void) null);
             if (IS_AUTHORIZED) {
                 Intent intent = new Intent(this, DiaryActivity.class);
-                intent.putExtra(getLocalClassName(), email);
+                intent.putExtra("email", email);
                 startActivity(intent);
             }
         }

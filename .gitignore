@@ -51,3 +51,5 @@ gen/
 bin/
 build/
 local.properties
+.gradle/
+.gradle/*
